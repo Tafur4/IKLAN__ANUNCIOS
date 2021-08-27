@@ -2,7 +2,7 @@ from django.contrib.auth.password_validation import password_changed
 from django.http.response import Http404
 from django.shortcuts import get_object_or_404, render, redirect, get_list_or_404
 from .models import Producto, Marca
-from .forms import ContactoForm, ProductoForm, CustomUserCreationFrom
+from .forms import ProductoForm, CustomUserCreationFrom
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import Http404
@@ -39,19 +39,6 @@ def home(request):
         'productos': productos
     }
     return render(request, 'app/home.html', data)
-
-def contacto(request):
-    data = {
-        'form': ContactoForm()
-    }
-    if request.method == 'POST':
-        formulario = ContactoForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data["mensaje"] = "Contacto guardado"
-        else:
-            data["form"] = formulario
-    return render(request, 'app/contacto.html', data)
 
 #permiso para entrar a cualquier pesgtaña
 #@login_required
